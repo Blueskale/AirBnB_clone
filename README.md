@@ -1,71 +1,34 @@
-# The AirBnB Clone Project
-![AirBnB Logo](https://www.pngitem.com/pimgs/m/132-1322125_transparent-background-airbnb-logo-hd-png-download.png)
+# AirBnB Clone – Phase 1: The Console
 
-## Project Description
-This is the first part of the AirBnB clone project where we worked on the backend of the project whiles interfacing it with a console application with the help of the cmd module in python.
+![Python](https://img.shields.io/badge/Python-3-3776AB?logo=python&logoColor=white)
+![Storage](https://img.shields.io/badge/storage-JSON%20file-7aa2f7)
+![ALX](https://img.shields.io/badge/ALX-Software%20Engineering-0f9d58)
 
-Data (python objects) generated are stored in a json file and can be accessed with the help of the json module in python
+First phase of the ALX/Holberton **AirBnB clone**: a backend data layer written in plain Python, a JSON file storage engine, and an interactive command interpreter built on the `cmd` module for creating, inspecting, updating and deleting objects. Later phases add MySQL storage, a REST API and a dynamic front end.
 
-## Description of the command interpreter:
-The interface of the application is just like the Bash shell except that this has a limited number of accepted commands that were solely defined for the purposes of the usage of the AirBnB website.
+Project series: **v1 – console** · [v2 – MySQL and Flask](https://github.com/Blueskale/AirBnB_clone_v2) · [v3 – REST API](https://github.com/Blueskale/AirBnB_clone_v3) · [v4 – dynamic web](https://github.com/Blueskale/AirBnB_clone_v4)
 
-This command line interpreter  serves as the frontend of the web app where users can interact with the backend which was developed with python OOP programming.
+## What it does
 
-Some of the commands available are:
-- show
-- create
-- update
-- destroy
-- count
+- `BaseModel` gives every object a UUID, `created_at`/`updated_at` timestamps, `save()` and `to_dict()` serialisation.
+- Domain classes `User`, `State`, `City`, `Amenity`, `Place` and `Review` inherit from it.
+- `FileStorage` serialises all objects to `file.json` and reloads them on start-up.
+- `console.py` is a shell-like interpreter (prompt `(hbnb)`) that lets you create, show, list, count, update and destroy objects without writing Python.
+- `web_static/` holds the first static HTML/CSS mock-ups of the site, validated with the W3C validator script included.
 
-And as part of the implementation of the command line interpreter coupled with the backend and file storage system, the folowing actions can be performed:
--   Creating new objects (ex: a new User or a new Place)
--   Retrieving an object from a file, a database etc…
--   Doing operations on objects (count, compute stats, etc…)
--   Updating attributes of an object
--   Destroying an object
+## Getting started
 
-## How to start it
-These instructions will get you a copy of the project up and running on your local machine (Linux distro) for development and testing purposes.
-
-## Installing
-
-You will need to clone the repository of the project from Github. This will contain the simple shell program and all of its dependencies.
-
+```bash
+git clone https://github.com/Blueskale/AirBnB_clone.git
+cd AirBnB_clone
+./console.py
 ```
-git clone https://github.com/jzamora5/AirBnB_clone.git
-```
-After cloning the repository you will have a folder called AirBnB_clone. In here there will be several files that allow the program to work.
 
-> /console.py : The main executable of the project, the command interpreter.
->
-> models/engine/file_storage.py: Class that serializes instances to a JSON file and deserializes JSON file to instances
-> 
-> models/__ init __.py:  A unique `FileStorage` instance for the application
-> 
-> models/base_model.py: Class that defines all common attributes/methods for other classes.
-> 
-> models/user.py: User class that inherits from BaseModel
-> 
->models/state.py: State class that inherits from BaseModel
->
->models/city.py: City class that inherits from BaseModel
->
->models/amenity.py: Amenity class that inherits from BaseModel
->
->models/place.py: Place class that inherits from BaseModel
->
->models/review.py: Review class that inherits from BaseModel
+No third-party packages are required; Python 3 is enough.
 
+## Using the console
 
-
-## How to use it
-It can work in two different modes:
-
-
-**Interactive** and **Non-interactive**.
-
-In **Interactive mode**, the console will display a prompt (hbnb) indicating that the user can write and execute a command. After the command is run, the prompt will appear again a wait for a new command. This can go indefinitely as long as the user does not exit the program.
+The console works in **interactive** mode:
 
 ```
 $ ./console.py
@@ -73,100 +36,64 @@ $ ./console.py
 
 Documented commands (type help <topic>):
 ========================================
-EOF  help  quit
+EOF  all  count  create  destroy  help  quit  show  update
 
-(hbnb) 
-(hbnb) 
-(hbnb) quit
-$
-```
-
-In **Non-interactive mode**, the shell will need to be run with a command input piped into its execution so that the command is run as soon as the Shell starts. In this mode no prompt will appear, and no further input will be expected from the user.
-
-
-```
-$ echo "help" | ./console.py
-(hbnb)
-
-Documented commands (type help <topic>):
-========================================
-EOF  help  quit
-(hbnb) 
-$
-$ cat test_help
-help
-$
-$ cat test_help | ./console.py
-(hbnb)
-
-Documented commands (type help <topic>):
-========================================
-EOF  help  quit
-(hbnb) 
-$
-```
-
-## Format of Command Input
-
-In order to give commands to the console, these will need to be piped through an echo in case of  **Non-interactive mode**.
-
-In  **Interactive Mode**  the commands will need to be written with a keyboard when the prompt appears and will be recognized when an enter key is pressed (new line). As soon as this happens, the console will attempt to execute the command through several means or will show an error message if the command didn't run successfully. In this mode, the console can be exited using the **CTRL + D** combination,  **CTRL + C**, or the command **quit** or **EOF**.
-
-## Arguments
-
-Most commands have several options or arguments that can be used when executing the program. In order for the Shell to recognize those parameters, the user must separate everything with spaces.
-
-Example:
-
-```
-
-user@ubuntu:~/AirBnB$ ./console.py
-(hbnb) create BaseModel
+(hbnb) create User
 49faff9a-6318-451f-87b6-910505c55907
-user@ubuntu:~/AirBnB$ ./console.py
-
+(hbnb) show User 49faff9a-6318-451f-87b6-910505c55907
+[User] (49faff9a-6318-451f-87b6-910505c55907) {'id': '49faff9a-...', 'created_at': ..., 'updated_at': ...}
+(hbnb) quit
 ```
 
-or
+and in **non-interactive** mode, where commands are piped in:
 
 ```
-user@ubuntu:~/AirBnB$ ./console.py $ echo "create BaseModel" | ./console.py
+$ echo "create State" | ./console.py
 (hbnb)
 e37ebcd3-f8e1-4c1f-8095-7a019070b1fa
 (hbnb)
-user@ubuntu:~/AirBnB$ ./console.py
 ```
 
-## Available commands and what they do
+Exit with `quit`, `EOF`, `Ctrl+D` or `Ctrl+C`.
 
-The recognizable commands by the interpreter are the following:
+### Commands
 
-|Command| Description |
-|--|--|
-| **quit or EOF** | Exits the program |
-| **Usage** | By itself |
-| **-----** | **-----** |
-| **help** | Provides a text describing how to use a command.  |
-| **Usage** | By itself --or-- **help <command\>** |
-| **-----** | **-----** |
-| **create** | Creates a new instance of a valid `Class`, saves it (to the JSON file) and prints the `id`.  Valid classes are: BaseModel, User, State, City, Amenity, Place, Review. |
-| **Usage** | **create <class name\>**|
-| **-----** | **-----** |
-| **show** | Prints the string representation of an instance based on the class name and `id`  |
-| **Usage** | **show <class name\> <id\>** --or-- **<class name\>.show(<id\>)**|
-| **-----** | **-----** |
-| **destroy** | Deletes an instance based on the class name and `id` (saves the change into a JSON file).  |
-| **Usage** | **destroy <class name\> <id\>** --or-- **<class name>.destroy(<id>)** |
-| **-----** | **-----** |
-| **all** | Prints all string representation of all instances based or not on the class name.  |
-| **Usage** | By itself or **all <class name\>** --or-- **<class name\>.all()** |
-| **-----** | **-----** |
-| **update** | Updates an instance based on the class name and `id` by adding or updating attribute (saves the changes into a JSON file).  |
-| **Usage** | **update <class name\> <id\> <attribute name\> "<attribute value\>"** ---or--- **<class name\>.update(<id\>, <attribute name\>, <attribute value\>)** --or-- **<class name\>.update(<id\>, <dictionary representation\>)**|
-| **-----** | **-----** |
-| **count** | Retrieve the number of instances of a class.  |
-| **Usage** | **<class name\>.count()** |
+| Command | Usage | Description |
+|---|---|---|
+| `create` | `create <class>` | Creates an instance, saves it to `file.json` and prints its id |
+| `show` | `show <class> <id>` or `<class>.show(<id>)` | Prints the string representation of an instance |
+| `destroy` | `destroy <class> <id>` or `<class>.destroy(<id>)` | Deletes an instance and saves the change |
+| `all` | `all`, `all <class>` or `<class>.all()` | Prints all instances, optionally filtered by class |
+| `count` | `<class>.count()` | Prints the number of instances of a class |
+| `update` | `update <class> <id> <attribute> "<value>"`, `<class>.update(<id>, <attribute>, <value>)` or `<class>.update(<id>, <dictionary>)` | Adds or updates an attribute and saves the change |
+| `help` | `help` or `help <command>` | Describes a command |
+| `quit`, `EOF` | – | Exits the console |
 
-## Auuthors
-Princewill Mmadu
-Stanley Chukwu
+Valid classes: `BaseModel`, `User`, `State`, `City`, `Amenity`, `Place`, `Review`.
+
+## Project structure
+
+```
+AirBnB_clone/
+├── console.py                     # the command interpreter
+├── models/
+│   ├── base_model.py              # common attributes and methods
+│   ├── user.py, state.py, city.py, amenity.py, place.py, review.py
+│   ├── __init__.py                # the single FileStorage instance
+│   └── engine/file_storage.py     # JSON serialisation and deserialisation
+├── tests/                         # unittest suites for the console, models and storage
+└── web_static/                    # static HTML/CSS prototypes (0-index.html … 8-index.html)
+```
+
+## Running the tests
+
+```bash
+python3 -m unittest discover tests
+```
+
+The suites also check PEP 8 style and need the `pep8` package (`pip install pep8`). Several console tests assert help texts from an earlier iteration of the interpreter and currently fail; they are kept for reference.
+
+## Authors
+
+- Princewill Mmadu – [GitHub](https://github.com/Blueskale)
+- Stanley Chukwu
